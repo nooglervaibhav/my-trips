@@ -18,7 +18,8 @@ function openItinerary(index) {
   modalItinerary.innerHTML = trip.itinerary.map(day => `
     <div class="day-block">
       <h4>${day.day} – ${day.title}</h4>
-      <p>${day.details}</p>
+      <div>${d.details}</div>
+
     </div>
   `).join("");
   itineraryModal.style.display = "block";
