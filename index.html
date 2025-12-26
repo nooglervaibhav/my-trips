@@ -17,12 +17,7 @@
 }
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif;}
-body{
-  background:var(--bg);
-  color:#fff;
-  padding:20px;
-}
-
+body{background:var(--bg);color:#fff;padding:20px;}
 .container{max-width:480px;margin:auto;}
 
 header{text-align:center;margin-bottom:30px;}
@@ -88,7 +83,7 @@ header{text-align:center;margin-bottom:30px;}
   background:rgba(255,255,255,.05);
   padding:14px;border-radius:14px;margin-bottom:12px;
 }
-.day-block h4{color:var(--accent);margin-bottom:5px}
+.day-block h4{color:var(--accent);margin-bottom:6px}
 .close-btn{
   width:100%;padding:12px;border:none;
   background:var(--gradient);
@@ -129,51 +124,110 @@ header{text-align:center;margin-bottom:30px;}
 </div>
 
 <script>
-const trips=[{
-  city:"Rishikesh, Uttarakhand",
-  days:"7 Days",
-  shortDescription:"Adventure, spirituality & bachelor party vibes",
-  heroImage:"https://images.unsplash.com/photo-1548013146-72479768bada",
-  itinerary:[
-    {day:"Day 1",title:"Arrival & Exploration",details:"Hotel check-in, Laxman Jhula visit, river rafting & Beatles Ashram"},
-    {day:"Day 2",title:"Bungee Jumping & Aarti",details:"Bungee jumping, yoga session, Ganga Aarti at Triveni Ghat"},
-    {day:"Day 3",title:"Waterfall Trek",details:"Neer Garh Waterfall trek and street food exploration"},
-    {day:"Day 4",title:"Spa & Ayurveda",details:"Spa therapy, Ayurvedic massage, Parmarth Niketan Aarti"},
-    {day:"Day 5",title:"Adventure Sports",details:"Zip-lining, rock climbing, rappelling, riverside cafes"},
-    {day:"Day 6",title:"Spiritual Day",details:"Sivananda Ashram, Vashishta Cave, meditation"},
-    {day:"Day 7",title:"Rafting & Farewell",details:"White water rafting and farewell dinner"}
-  ]
-}];
+const trips = [
+  {
+    city: "Rishikesh, Uttarakhand",
+    days: "7 Days",
+    shortDescription: "Adventure, spirituality & bachelor party vibes",
+    heroImage: "https://images.unsplash.com/photo-1548013146-72479768bada",
+    itinerary: [
+      {
+        day: "Day 1",
+        title: "Arrival & Local Exploration",
+        details: `
+        Arrive in Rishikesh and check into your hotel.<br><br>
+        • Laxman Jhula – Free | 1–2 hrs<br>
+        • River Rafting & Kayaking – ₹1500–2000 | 3–4 hrs<br>
+        • Beatles Ashram – ₹150 | 1–2 hrs
+        `
+      },
+      {
+        day: "Day 2",
+        title: "Adventure & Spiritual Evening",
+        details: `
+        • Bungee Jumping – ₹3500–4500 | 3–4 hrs<br>
+        • Yoga Session at Ashram – 2–3 hrs<br>
+        • Ganga Aarti at Triveni Ghat – Free | 1–2 hrs
+        `
+      },
+      {
+        day: "Day 3",
+        title: "Nature & Local Flavors",
+        details: `
+        • Neer Garh Waterfall Trek – Free | 4–5 hrs<br>
+        • Relax & swim near waterfall<br>
+        • Street Food Tour – ₹200–500 | 1–2 hrs
+        `
+      },
+      {
+        day: "Day 4",
+        title: "Wellness & Ayurveda",
+        details: `
+        • Spa Session – ₹2000–5000 | 2–3 hrs<br>
+        • Ayurvedic Therapy – 2–3 hrs<br>
+        • Ganga Aarti at Parmarth Niketan – Free | 1–2 hrs
+        `
+      },
+      {
+        day: "Day 5",
+        title: "Extreme Adventure & Cafes",
+        details: `
+        • Zip-lining, Rock Climbing, Rappelling – ₹2000–4000 | 4–5 hrs<br>
+        • Relax at Riverside Café – 1–2 hrs
+        `
+      },
+      {
+        day: "Day 6",
+        title: "Spiritual Exploration",
+        details: `
+        • Sivananda Ashram – Free | 2–3 hrs<br>
+        • Vashishta Cave – Free | 2–3 hrs<br>
+        • Meditation / Satsang – Free | 1–2 hrs
+        `
+      },
+      {
+        day: "Day 7",
+        title: "Adventure & Farewell",
+        details: `
+        • White Water Rafting – ₹1000–2000 | 3–4 hrs<br>
+        • Farewell Dinner – ₹500–1000 | 2–3 hrs
+        `
+      }
+    ]
+  }
+];
 
 function renderTrips(data){
-  document.getElementById("tripContainer").innerHTML=data.map((t,i)=>`
-  <div class="trip-card" onclick="openItinerary(${i})">
-    <div class="trip-info">
-      <h3>${t.city}</h3>
-      <p>${t.shortDescription}</p>
+  document.getElementById("tripContainer").innerHTML = data.map((t,i)=>`
+    <div class="trip-card" onclick="openItinerary(${i})">
+      <div class="trip-info">
+        <h3>${t.city}</h3>
+        <p>${t.shortDescription}</p>
+      </div>
+      <div class="duration-tag">${t.days}</div>
     </div>
-    <div class="duration-tag">${t.days}</div>
-  </div>`).join("");
+  `).join("");
 }
 
 function openItinerary(i){
-  const t=trips[i];
-  modalCity.innerText=t.city;
-  modalDays.innerText=t.days;
-  modalImage.src=t.heroImage;
-  modalItinerary.innerHTML=t.itinerary.map(d=>`
+  const t = trips[i];
+  modalCity.innerText = t.city;
+  modalDays.innerText = t.days;
+  modalImage.src = t.heroImage;
+  modalItinerary.innerHTML = t.itinerary.map(d=>`
     <div class="day-block">
       <h4>${d.day} – ${d.title}</h4>
       <p>${d.details}</p>
-    </div>`).join("");
-  itineraryModal.style.display="block";
+    </div>
+  `).join("");
+  itineraryModal.style.display = "block";
 }
 
-function closeModal(){itineraryModal.style.display="none"}
+function closeModal(){ itineraryModal.style.display="none"; }
 
 function filterTrips(){
-  const v=citySearch.value.toLowerCase();
-  renderTrips(trips.filter(t=>t.city.toLowerCase().includes(v)));
+  const v = citySearch.value.toLowerCase();
+  renderTrips(trips.filter(t => t.city.toLowerCase().includes(v)));
 }
 
 renderTrips(trips);
