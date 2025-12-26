@@ -1,269 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Itineraries | Link in Bio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css">
-    
-    <style>
-        :root {
-            --accent: #00d2ff; /* Bright Cyan */
-            --gradient: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
-            --bg: #0f172a;
-            --card-bg: rgba(255, 255, 255, 0.05);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel Itineraries | Link in Bio</title>
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-        body {
-            background-color: var(--bg);
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(0, 210, 255, 0.1) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(58, 123, 213, 0.1) 0%, transparent 20%);
-            color: #ffffff;
-            line-height: 1.6;
-            min-height: 100vh;
-            padding: 20px;
-        }
+<style>
+:root{
+  --accent:#00d2ff;
+  --gradient:linear-gradient(135deg,#00d2ff,#3a7bd5);
+  --bg:#0f172a;
+  --card-bg:rgba(255,255,255,.05);
+}
 
-        .container {
-            max-width: 480px;
-            margin: 0 auto;
-        }
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif;}
+body{
+  background:var(--bg);
+  color:#fff;
+  padding:20px;
+}
 
-        /* Profile Section */
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            animation: fadeIn 1s ease;
-        }
+.container{max-width:480px;margin:auto;}
 
-        .profile-pic {
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            border: 3px solid var(--accent);
-            padding: 3px;
-            margin-bottom: 15px;
-            box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
-        }
+header{text-align:center;margin-bottom:30px;}
+.profile-pic{
+  width:90px;height:90px;border-radius:50%;
+  border:3px solid var(--accent);margin-bottom:10px;
+}
+.handle{color:var(--accent);font-size:.9rem}
+.bio{color:#94a3b8;font-size:.9rem;margin-top:8px}
 
-        h1 { font-size: 1.5rem; font-weight: 700; }
-        .handle { color: var(--accent); font-weight: 600; font-size: 0.9rem; margin-bottom: 10px; display: block; }
-        .bio { font-size: 0.9rem; color: #94a3b8; margin-bottom: 20px; }
+.search-container{margin-bottom:20px}
+#citySearch{
+  width:100%;padding:15px 20px;border-radius:30px;
+  border:1px solid rgba(255,255,255,.1);
+  background:#1e293b;color:#fff;
+}
 
-        /* Search Bar */
-        .search-container {
-            position: sticky;
-            top: 10px;
-            z-index: 100;
-            margin-bottom: 25px;
-        }
+.trip-card{
+  background:var(--card-bg);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:18px;
+  padding:18px;
+  margin-bottom:14px;
+  display:flex;
+  justify-content:space-between;
+  cursor:pointer;
+  transition:.3s;
+}
+.trip-card:hover{transform:scale(1.02);border-color:var(--accent)}
+.trip-info p{color:#94a3b8;font-size:.85rem}
+.duration-tag{
+  background:var(--gradient);
+  padding:4px 12px;
+  border-radius:20px;
+  font-size:.75rem;
+}
 
-        #citySearch {
-            width: 100%;
-            padding: 16px 25px;
-            padding-right: 50px;
-            border-radius: 50px;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: rgba(30, 41, 59, 0.8);
-            backdrop-filter: blur(10px);
-            color: white;
-            font-size: 1rem;
-            transition: 0.3s;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-
-        #citySearch:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
-        }
-
-        .search-icon {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--accent);
-        }
-
-        /* Trip Cards */
-        .trip-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 15px;
-            text-decoration: none;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            animation: slideUp 0.5s ease forwards;
-        }
-
-        .trip-card:hover {
-            background: rgba(255,255,255,0.1);
-            transform: scale(1.02);
-            border-color: var(--accent);
-        }
-
-        .trip-info h3 {
-            font-size: 1.1rem;
-            margin-bottom: 4px;
-        }
-
-        .trip-info p {
-            font-size: 0.85rem;
-            color: #94a3b8;
-        }
-
-        .duration-tag {
-            background: var(--gradient);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .no-results {
-            text-align: center;
-            margin-top: 50px;
-            color: #64748b;
-            display: none;
-        }
-
-        /* Animations */
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { 
-            from { opacity: 0; transform: translateY(20px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
-
-        /* Social Links */
-        .socials {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-            padding-bottom: 50px;
-        }
-
-        .socials a { color: white; font-size: 1.2rem; transition: 0.3s; }
-        .socials a:hover { color: var(--accent); }
-
-    </style>
+#itineraryModal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:999;
+}
+.modal-overlay{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,.7);
+  backdrop-filter:blur(6px);
+}
+.modal-content{
+  position:relative;
+  background:#0f172a;
+  max-width:600px;
+  margin:40px auto;
+  padding:22px;
+  border-radius:20px;
+  max-height:85vh;
+  overflow-y:auto;
+}
+.modal-image{
+  width:100%;border-radius:16px;margin-bottom:15px;
+}
+.day-block{
+  background:rgba(255,255,255,.05);
+  padding:14px;border-radius:14px;margin-bottom:12px;
+}
+.day-block h4{color:var(--accent);margin-bottom:5px}
+.close-btn{
+  width:100%;padding:12px;border:none;
+  background:var(--gradient);
+  color:#fff;border-radius:12px;
+  margin-top:15px;font-weight:700;
+}
+</style>
 </head>
+
 <body>
-
 <div class="container">
-    <header>
-        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=200&h=200&fit=crop" alt="Profile" class="profile-pic">
-        <h1>Travel With Me</h1>
-        <span class="handle">@yourusername</span>
-        <p class="bio">Exploring the world one city at a time. Search below to find my exact route, hotels, and food spots!</p>
-    </header>
 
-    <div class="search-container">
-        <input type="text" id="citySearch" placeholder="Search a destination..." onkeyup="filterTrips()">
-        <i class="fas fa-search search-icon"></i>
-    </div>
+<header>
+<img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=200" class="profile-pic">
+<h1>Travel With Me</h1>
+<span class="handle">@yourusername</span>
+<p class="bio">Click any city to see my exact itinerary</p>
+</header>
 
-    <div id="tripContainer">
-        </div>
+<div class="search-container">
+<input type="text" id="citySearch" placeholder="Search destination..." onkeyup="filterTrips()">
+</div>
 
-    <div id="noResults" class="no-results">
-        <i class="fas fa-plane-slash" style="font-size: 2rem; margin-bottom: 10px;"></i>
-        <p>No itinerary found for that city yet!</p>
-    </div>
+<div id="tripContainer"></div>
 
-    <div class="socials">
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-youtube"></i></a>
-        <a href="#"><i class="fab fa-tiktok"></i></a>
-    </div>
+</div>
+
+<!-- MODAL -->
+<div id="itineraryModal">
+  <div class="modal-overlay" onclick="closeModal()"></div>
+  <div class="modal-content">
+    <img id="modalImage" class="modal-image">
+    <h2 id="modalCity"></h2>
+    <p id="modalDays"></p>
+    <div id="modalItinerary"></div>
+    <button class="close-btn" onclick="closeModal()">Close Itinerary</button>
+  </div>
 </div>
 
 <script>
-    /* EDIT YOUR DATA HERE 
-       Add as many trips as you like!
-    */
-    const trips = [
-        {
-            city: "Rishikesh, Uttrakhand",
-            days: "7 Days",
-            description: "Experience the perfect blend of adventure, relaxation, and spirituality in Rishikesh. This 7-day bachelor party itinerary includes thrilling activities like river rafting, bungee jumping, zip-lining, and waterfall trekking, along with rejuvenating yoga sessions, spa therapies, and Ayurvedic treatments. Explore iconic landmarks such as Laxman Jhula and the Beatles Ashram, witness the divine Ganga Aarti at Triveni Ghat and Parmarth Niketan, and unwind at scenic riverside cafés. A balanced journey offering adrenaline, nature, wellness, and unforgettable group memories.",
-            url: "https://yourlink.com/rishikesh"
-        },
-        {
-            city: "Santorini, Greece",
-            days: "3 Days",
-            description: "Sunset spots and hidden blue domes.",
-            url: "https://yourlink.com/greece"
-        },
-        {
-            city: "Tokyo, Japan",
-            days: "10 Days",
-            description: "Street food, shrines, and shopping guide.",
-            url: "https://yourlink.com/tokyo"
-        },
-        {
-            city: "New York City, USA",
-            days: "5 Days",
-            description: "NYC skyline views and Broadway tips.",
-            url: "https://yourlink.com/nyc"
-        },
-        {
-            city: "Dubai, UAE",
-            days: "4 Days",
-            description: "Luxury malls and desert safaris.",
-            url: "https://yourlink.com/dubai"
-        }
-    ];
+const trips=[{
+  city:"Rishikesh, Uttarakhand",
+  days:"7 Days",
+  shortDescription:"Adventure, spirituality & bachelor party vibes",
+  heroImage:"https://images.unsplash.com/photo-1548013146-72479768bada",
+  itinerary:[
+    {day:"Day 1",title:"Arrival & Exploration",details:"Hotel check-in, Laxman Jhula visit, river rafting & Beatles Ashram"},
+    {day:"Day 2",title:"Bungee Jumping & Aarti",details:"Bungee jumping, yoga session, Ganga Aarti at Triveni Ghat"},
+    {day:"Day 3",title:"Waterfall Trek",details:"Neer Garh Waterfall trek and street food exploration"},
+    {day:"Day 4",title:"Spa & Ayurveda",details:"Spa therapy, Ayurvedic massage, Parmarth Niketan Aarti"},
+    {day:"Day 5",title:"Adventure Sports",details:"Zip-lining, rock climbing, rappelling, riverside cafes"},
+    {day:"Day 6",title:"Spiritual Day",details:"Sivananda Ashram, Vashishta Cave, meditation"},
+    {day:"Day 7",title:"Rafting & Farewell",details:"White water rafting and farewell dinner"}
+  ]
+}];
 
-    function renderTrips(data) {
-        const container = document.getElementById('tripContainer');
-        const noResults = document.getElementById('noResults');
-        
-        if (data.length === 0) {
-            noResults.style.display = 'block';
-            container.innerHTML = '';
-        } else {
-            noResults.style.display = 'none';
-            container.innerHTML = data.map((trip, index) => `
-                <a href="${trip.url}" class="trip-card" style="animation-delay: ${index * 0.1}s">
-                    <div class="trip-info">
-                        <h3>${trip.city}</h3>
-                        <p>${trip.description}</p>
-                    </div>
-                    <div class="duration-tag">${trip.days}</div>
-                </a>
-            `).join('');
-        }
-    }
+function renderTrips(data){
+  document.getElementById("tripContainer").innerHTML=data.map((t,i)=>`
+  <div class="trip-card" onclick="openItinerary(${i})">
+    <div class="trip-info">
+      <h3>${t.city}</h3>
+      <p>${t.shortDescription}</p>
+    </div>
+    <div class="duration-tag">${t.days}</div>
+  </div>`).join("");
+}
 
-    function filterTrips() {
-        const searchTerm = document.getElementById('citySearch').value.toLowerCase();
-        const filtered = trips.filter(trip => 
-            trip.city.toLowerCase().includes(searchTerm) || 
-            trip.description.toLowerCase().includes(searchTerm)
-        );
-        renderTrips(filtered);
-    }
+function openItinerary(i){
+  const t=trips[i];
+  modalCity.innerText=t.city;
+  modalDays.innerText=t.days;
+  modalImage.src=t.heroImage;
+  modalItinerary.innerHTML=t.itinerary.map(d=>`
+    <div class="day-block">
+      <h4>${d.day} – ${d.title}</h4>
+      <p>${d.details}</p>
+    </div>`).join("");
+  itineraryModal.style.display="block";
+}
 
-    // Load all trips on startup
-    renderTrips(trips);
+function closeModal(){itineraryModal.style.display="none"}
+
+function filterTrips(){
+  const v=citySearch.value.toLowerCase();
+  renderTrips(trips.filter(t=>t.city.toLowerCase().includes(v)));
+}
+
+renderTrips(trips);
 </script>
 
 </body>
