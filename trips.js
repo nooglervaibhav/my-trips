@@ -3,13 +3,14 @@ const trips = [
     city: "Rishikesh, Uttarakhand",
     days: "7 Days",
     shortDescription: "Adventure, spirituality & bachelor party vibes",
+    heroImage: "https://images.unsplash.com/photo-1609947017136-9daf32a4b1b3",
     itinerary: [
       {
         day: "Day 1",
         title: "Arrival & Local Exploration",
         details: `
         Laxman Jhula – Free | 1–2 hrs<br>
-        River Rafting & Kayaking – ₹1500–2000 | 3–4 hrs<br>
+        River Rafting & Kayaking – ₹500–1000 | 3–4 hrs<br>
         Beatles Ashram – ₹150 | 1–2 hrs
         `
       },
