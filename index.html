@@ -17,8 +17,21 @@
 }
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif;}
-body{background:var(--bg);color:#fff;padding:20px;}
-.container{max-width:480px;margin:auto;}
+body{
+  min-height:100vh;
+  color:#fff;
+  padding:20px;
+
+  background:
+    linear-gradient(
+      rgba(15, 23, 42, 0.85),
+      rgba(15, 23, 42, 0.95)
+    ),
+    url("'/Users/vaibhav22apple/Library/Mobile Documents/com~apple~CloudDocs/Downloads/sissu.jpg'");
+
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 
 header{text-align:center;margin-bottom:30px;}
 .profile-pic{
